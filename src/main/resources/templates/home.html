@@ -14,7 +14,20 @@
     </header>
     <section>
         <main>
-            <p>You can select any recipe.</p>
+            <div th:if="${noRecipe}">
+                <p>No recipe is available! come back later!</p>
+            </div>
+            <div th:if="${recipes}">
+                <p>Select any recipe:</p>
+            </div>
+            <form>
+                <button>Create new recipe</button>
+            </form>
+            <br />
+            <form th:action="@{/splacky-recipes/create-ingredient}"
+                  method="GET">
+                <button>Create new Ingredient</button>
+            </form>
         </main>
     </section>
 </body>

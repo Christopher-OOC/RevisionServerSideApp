@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link th:href="@{/style.css}" rel="stylesheet">
+    <title>Splacky Recipes</title>
+</head>
+<body>
+<header class="header">
+    <h1>Welcome to Splacky Recipes</h1>
+</header>
+<section>
+    <main>
+        <div>
+            <h1>Create Your Ingredient</h1>
+            <form th:action="@{/splacky-recipes/create-ingredient}"
+                  method="POST" th:object="${newIngredient}">
+
+                <label>Ingredient Name</label>
+                <input type="text" th:field="*{name}" />
+
+                <button>Create</button>
+            </form>
+        </div>
+    </main>
+</section>
+</body>
+</html>
