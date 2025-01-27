@@ -3,6 +3,7 @@ package com.example.semester4.ServerSideApp.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -17,13 +18,14 @@ public class Recipe {
 
     @Lob
     @Column(columnDefinition = "MEDIUMBLOB")
-    private byte[] image;
+    private byte[] imageContent;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private String imageType;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<Ingredient> ingredients = new ArrayList<>();
 
     private String instruction;
-    private double rating;
 
     public Recipe() {
 
@@ -45,14 +47,6 @@ public class Recipe {
         this.name = name;
     }
 
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
     public List<Ingredient> getIngredients() {
         return ingredients;
     }
@@ -69,11 +63,29 @@ public class Recipe {
         this.instruction = instruction;
     }
 
-    public double getRating() {
-        return rating;
+    public byte[] getImageContent() {
+        return imageContent;
     }
 
-    public void setRating(double rating) {
-        this.rating = rating;
+    public void setImageContent(byte[] imageContent) {
+        this.imageContent = imageContent;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", ingredients=" + ingredients +
+                ", instruction='" + instruction + '\'' +
+                '}';
     }
 }

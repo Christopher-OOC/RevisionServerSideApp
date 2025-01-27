@@ -4,6 +4,8 @@ import com.example.semester4.ServerSideApp.model.Ingredient;
 import com.example.semester4.ServerSideApp.repository.IngredientRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class IngredientService {
 
@@ -15,6 +17,10 @@ public class IngredientService {
 
     public void createIngredient(Ingredient ingredient) {
         ingredientRepository.save(ingredient);
+    }
+
+    public List<Ingredient> getAllIngredients() {
+        return ingredientRepository.findAll();
     }
 
 }

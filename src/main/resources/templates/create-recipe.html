@@ -14,7 +14,31 @@
 </header>
 <section>
     <main>
+        <p>Create your recipe from scratch</p>
+        <form th:action="@{/splacky-recipes/create-recipe}" method="POST" th:object="${newRecipe}" enctype="multipart/form-data">
+            <div>
+                <label>Name: </label>
+                <input type="text" th:field="*{name}"  />
+            </div>
+            <div>
+                <label>Instruction: </label>
+                <textarea type="text" th:field="*{instruction}" placeholder="How to prepare it..." cols="10" rows="5"></textarea>
+            </div>
+            <br />
+            <h3>Select Ingredients</h3>
+            <div th:each="ingredient : ${ingredients}">
+                <div>
+                    <label>[[${ingredient.name}]]</label>
+                    <input type="checkbox" th:value="${ingredient.name}" th:field="*{ingredients}" />
+                </div>
+            </div>
+            <div>
+                <label>Select image:</label>
+                <input type="file" name="file" />
+            </div>
 
+            <button type="submit">Create</button>
+        </form>
     </main>
 </section>
 </body>

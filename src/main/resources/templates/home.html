@@ -12,15 +12,30 @@
     <header class="header">
         <h1>Welcome to Splacky Recipes</h1>
     </header>
-    <section>
+    <section>we
         <main>
             <div th:if="${noRecipe}">
                 <p>No recipe is available! come back later!</p>
             </div>
             <div th:if="${recipes}">
                 <p>Select any recipe:</p>
+                <div class="recipe-container">
+                    <div th:each="recipe : ${recipes}">
+                        <div class="recipe">
+                            <div class="image-container">
+                                <img th:src="@{/splacky-recipes/resources/{id}(id=${recipe.id})}" alt="Recipe Image"/>
+                            </div>
+                            <p>[[${recipe.name}]]</p>
+                            <p>[[${recipe.instruction}]]</p>
+                            <div th:each="ingredient : ${recipe.ingredients}">
+                                <span>[[${ingredient.name}]]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <form>
+            <form th:action="@{/splacky-recipes/create-recipe}"
+                  method="GET">
                 <button>Create new recipe</button>
             </form>
             <br />
