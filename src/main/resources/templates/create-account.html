@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link th:href="@{/style.css}" rel="stylesheet">
+    <title>Splacky Recipes</title>
+</head>
+<body>
+<header class="header">
+    <h1>Welcome to Splacky Recipes</h1>
+</header>
+<section>
+    <main>
+        <p>Fill the information to create yupr account!</p>
+        <form method="POST" th:action="@{/splacky-recipes/create-account}" th:object="${newUser}">
+            <div>
+                <label>Full Name</label>
+                <input type="text" th:field="*{fullName}" />
+            </div>
+            <br />
+            <div>
+                <label>Email</label>
+                <input type="text" th:field="*{email}" />
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="password" th:field="*{password}" />
+            </div>
+            <button>Login</button>
+        </form>
+    </main>
+</section>
+</body>
+</html>

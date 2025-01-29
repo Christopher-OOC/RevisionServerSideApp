@@ -2,8 +2,10 @@ package com.example.semester4.ServerSideApp.controller;
 
 import com.example.semester4.ServerSideApp.model.Ingredient;
 import com.example.semester4.ServerSideApp.model.Recipe;
+import com.example.semester4.ServerSideApp.model.User;
 import com.example.semester4.ServerSideApp.service.IngredientService;
 import com.example.semester4.ServerSideApp.service.RecipeService;
+import com.example.semester4.ServerSideApp.service.UserService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,13 +22,16 @@ public class WebController {
 
     private RecipeService recipeService;
     private IngredientService ingredientService;
+    private UserService userService;
 
     public WebController(
             RecipeService recipeService,
-            IngredientService ingredientService
+            IngredientService ingredientService,
+            UserService userService
     ) {
         this.recipeService = recipeService;
         this.ingredientService = ingredientService;
+        this.userService = userService;
     }
 
     @GetMapping(value = "/")
@@ -86,5 +91,26 @@ public class WebController {
                 .contentType(MediaType.valueOf(recipe.getImageType()))
                 .body(recipe.getImageContent());
     }
+
+    @GetMapping(value = "/login")
+    public String showLoginPage() {
+        return "login";
+    }
+
+    @GetMapping(value = "/create-account")
+    public String showCreateAccount(Model model) {
+        model.addAttribute("newUser", new User());
+
+        return "create-account";
+    }
+
+    @PostMapping(value = "/create-account")
+    public String showCreateAccount(@ModelAttribute("newUser") User user) {
+        userService.createUser(user);
+
+        return "/splacky-recipes/";
+    }
+
+
 }
 
